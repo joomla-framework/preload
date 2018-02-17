@@ -11,8 +11,17 @@
         "psr/link": "~1.0"
     },
     "require-dev": {
+        "joomla/application": "~2.0",
         "joomla/coding-standards": "~2.0@alpha",
-        "phpunit/phpunit": "~6.3"
+        "joomla/event": "~2.0",
+        "joomla/uri": "~2.0",
+        "phpunit/phpunit": "~6.3",
+        "symfony/web-link": "~3.4|~4.0"
+    },
+    "suggest": {
+        "joomla/application": "To use the PreloadSubscriber event listener, install `~2.0`",
+        "joomla/event": "To use the PreloadSubscriber event listener, install `~2.0`",
+        "symfony/web-link": "To use the PreloadSubscriber event listener, install `~3.4|~4.0`"
     },
     "autoload": {
         "psr-4": {
