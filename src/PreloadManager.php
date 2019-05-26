@@ -91,7 +91,7 @@ class PreloadManager
 	/**
 	 * Preloads a resource.
 	 *
-	 * @param   string  $uri         A public path
+	 * @param   string  $uri         The relation URI
 	 * @param   array   $attributes  The attributes of this link (e.g. "array('as' => true)", "array('crossorigin' => 'use-credentials')")
 	 *
 	 * @return  void
@@ -106,7 +106,7 @@ class PreloadManager
 	/**
 	 * Resolves a resource origin as early as possible.
 	 *
-	 * @param   string  $uri         A public path
+	 * @param   string  $uri         The relation URI
 	 * @param   array   $attributes  The attributes of this link (e.g. "array('as' => true)", "array('pr' => 0.5)")
 	 *
 	 * @return  void
@@ -121,7 +121,7 @@ class PreloadManager
 	/**
 	 * Initiates a early connection to a resource (DNS resolution, TCP handshake, TLS negotiation).
 	 *
-	 * @param   string  $uri         A public path
+	 * @param   string  $uri         The relation URI
 	 * @param   array   $attributes  The attributes of this link (e.g. "array('as' => true)", "array('pr' => 0.5)")
 	 *
 	 * @return  void
@@ -136,7 +136,7 @@ class PreloadManager
 	/**
 	 * Indicates to the client that it should prefetch this resource.
 	 *
-	 * @param   string  $uri         A public path
+	 * @param   string  $uri         The relation URI
 	 * @param   array   $attributes  The attributes of this link (e.g. "array('as' => true)", "array('pr' => 0.5)")
 	 *
 	 * @return  void
@@ -151,7 +151,7 @@ class PreloadManager
 	/**
 	 * Indicates to the client that it should prerender this resource.
 	 *
-	 * @param   string  $uri         A public path
+	 * @param   string  $uri         The relation URI
 	 * @param   array   $attributes  The attributes of this link (e.g. "array('as' => true)", "array('pr' => 0.5)")
 	 *
 	 * @return  void
