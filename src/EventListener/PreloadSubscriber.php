@@ -66,7 +66,7 @@ class PreloadSubscriber implements SubscriberInterface
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public function sendLinkHeader(ApplicationEvent $event)
+	public function sendLinkHeader(ApplicationEvent $event): void
 	{
 		/** @var AbstractWebApplication $application */
 		$application = $event->getApplication();

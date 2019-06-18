@@ -34,7 +34,7 @@ class PreloadManager
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public function __construct(EvolvableLinkProviderInterface $linkProvider = null)
+	public function __construct(?EvolvableLinkProviderInterface $linkProvider = null)
 	{
 		$this->linkProvider = $linkProvider ?: new GenericLinkProvider;
 	}
@@ -60,7 +60,7 @@ class PreloadManager
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public function setLinkProvider(EvolvableLinkProviderInterface $linkProvider)
+	public function setLinkProvider(EvolvableLinkProviderInterface $linkProvider): void
 	{
 		$this->linkProvider = $linkProvider;
 	}
@@ -76,7 +76,7 @@ class PreloadManager
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public function link(string $uri, string $rel, array $attributes = [])
+	public function link(string $uri, string $rel, array $attributes = []): void
 	{
 		$link = new Link($rel, $uri);
 
@@ -98,7 +98,7 @@ class PreloadManager
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public function preload(string $uri, array $attributes = [])
+	public function preload(string $uri, array $attributes = []): void
 	{
 		$this->link($uri, 'preload', $attributes);
 	}
@@ -113,7 +113,7 @@ class PreloadManager
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public function dnsPrefetch(string $uri, array $attributes = [])
+	public function dnsPrefetch(string $uri, array $attributes = []): void
 	{
 		$this->link($uri, 'dns-prefetch', $attributes);
 	}
@@ -128,7 +128,7 @@ class PreloadManager
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public function preconnect(string $uri, array $attributes = [])
+	public function preconnect(string $uri, array $attributes = []): void
 	{
 		$this->link($uri, 'preconnect', $attributes);
 	}
@@ -143,7 +143,7 @@ class PreloadManager
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public function prefetch(string $uri, array $attributes = [])
+	public function prefetch(string $uri, array $attributes = []): void
 	{
 		$this->link($uri, 'prefetch', $attributes);
 	}
@@ -158,7 +158,7 @@ class PreloadManager
 	 *
 	 * @since   __DEPLOY_VERSION__
 	 */
-	public function prerender(string $uri, array $attributes = [])
+	public function prerender(string $uri, array $attributes = []): void
 	{
 		$this->link($uri, 'prerender', $attributes);
 	}
