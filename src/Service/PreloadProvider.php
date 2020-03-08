@@ -33,7 +33,7 @@ class PreloadProvider implements ServiceProviderInterface
 	{
 		$container->share(
 			PreloadManager::class,
-			function ()
+			static function (): PreloadManager
 			{
 				return new PreloadManager;
 			}
@@ -41,7 +41,7 @@ class PreloadProvider implements ServiceProviderInterface
 
 		$container->share(
 			PreloadSubscriber::class,
-			function (Container $container)
+			static function (Container $container): PreloadSubscriber
 			{
 				return new PreloadSubscriber(
 					$container->get(PreloadManager::class)
