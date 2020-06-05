@@ -2,7 +2,7 @@
 /**
  * Part of the Joomla Framework Preload Package
  *
- * @copyright  Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
+ * @copyright  Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -19,7 +19,7 @@ use Symfony\Component\WebLink\HttpHeaderSerializer;
 /**
  * Asset preloading event subscriber
  *
- * @since  __DEPLOY_VERSION__
+ * @since  2.0.0-beta
  */
 class PreloadSubscriber implements SubscriberInterface
 {
@@ -27,7 +27,7 @@ class PreloadSubscriber implements SubscriberInterface
 	 * The preload manager.
 	 *
 	 * @var    PreloadManager
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0-beta
 	 */
 	private $preloadManager;
 
@@ -36,7 +36,7 @@ class PreloadSubscriber implements SubscriberInterface
 	 *
 	 * @param   PreloadManager  $preloadManager  The preload manager
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0-beta
 	 */
 	public function __construct(PreloadManager $preloadManager)
 	{
@@ -48,7 +48,7 @@ class PreloadSubscriber implements SubscriberInterface
 	 *
 	 * @return  array
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0-beta
 	 */
 	public static function getSubscribedEvents(): array
 	{
@@ -64,7 +64,7 @@ class PreloadSubscriber implements SubscriberInterface
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0-beta
 	 */
 	public function sendLinkHeader(ApplicationEvent $event): void
 	{

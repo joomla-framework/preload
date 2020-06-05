@@ -2,7 +2,7 @@
 /**
  * Part of the Joomla Framework Preload Package
  *
- * @copyright  Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
+ * @copyright  Copyright (C) 2005 - 2020 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -15,7 +15,7 @@ use Psr\Link\EvolvableLinkProviderInterface;
 /**
  * Manager for HTTP/2 asset preloading
  *
- * @since  __DEPLOY_VERSION__
+ * @since  2.0.0-beta
  */
 class PreloadManager
 {
@@ -23,7 +23,7 @@ class PreloadManager
 	 * The link provider
 	 *
 	 * @var    EvolvableLinkProviderInterface
-	 * @since  __DEPLOY_VERSION__
+	 * @since  2.0.0-beta
 	 */
 	protected $linkProvider;
 
@@ -32,7 +32,7 @@ class PreloadManager
 	 *
 	 * @param   EvolvableLinkProviderInterface  $linkProvider  The link provider
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0-beta
 	 */
 	public function __construct(?EvolvableLinkProviderInterface $linkProvider = null)
 	{
@@ -44,7 +44,7 @@ class PreloadManager
 	 *
 	 * @return  EvolvableLinkProviderInterface
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0-beta
 	 */
 	public function getLinkProvider(): EvolvableLinkProviderInterface
 	{
@@ -58,7 +58,7 @@ class PreloadManager
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0-beta
 	 */
 	public function setLinkProvider(EvolvableLinkProviderInterface $linkProvider): void
 	{
@@ -74,7 +74,7 @@ class PreloadManager
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0-beta
 	 */
 	public function link(string $uri, string $rel, array $attributes = []): void
 	{
@@ -96,7 +96,7 @@ class PreloadManager
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0-beta
 	 */
 	public function preload(string $uri, array $attributes = []): void
 	{
@@ -111,7 +111,7 @@ class PreloadManager
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0-beta
 	 */
 	public function dnsPrefetch(string $uri, array $attributes = []): void
 	{
@@ -126,7 +126,7 @@ class PreloadManager
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0-beta
 	 */
 	public function preconnect(string $uri, array $attributes = []): void
 	{
@@ -141,7 +141,7 @@ class PreloadManager
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0-beta
 	 */
 	public function prefetch(string $uri, array $attributes = []): void
 	{
@@ -156,7 +156,7 @@ class PreloadManager
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   2.0.0-beta
 	 */
 	public function prerender(string $uri, array $attributes = []): void
 	{
