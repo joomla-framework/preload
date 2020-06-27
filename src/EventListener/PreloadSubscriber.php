@@ -19,7 +19,7 @@ use Symfony\Component\WebLink\HttpHeaderSerializer;
 /**
  * Asset preloading event subscriber
  *
- * @since  2.0.0-beta
+ * @since  2.0.0
  */
 class PreloadSubscriber implements SubscriberInterface
 {
@@ -27,7 +27,7 @@ class PreloadSubscriber implements SubscriberInterface
 	 * The preload manager.
 	 *
 	 * @var    PreloadManager
-	 * @since  2.0.0-beta
+	 * @since  2.0.0
 	 */
 	private $preloadManager;
 
@@ -36,7 +36,7 @@ class PreloadSubscriber implements SubscriberInterface
 	 *
 	 * @param   PreloadManager  $preloadManager  The preload manager
 	 *
-	 * @since   2.0.0-beta
+	 * @since   2.0.0
 	 */
 	public function __construct(PreloadManager $preloadManager)
 	{
@@ -48,7 +48,7 @@ class PreloadSubscriber implements SubscriberInterface
 	 *
 	 * @return  array
 	 *
-	 * @since   2.0.0-beta
+	 * @since   2.0.0
 	 */
 	public static function getSubscribedEvents(): array
 	{
@@ -64,7 +64,7 @@ class PreloadSubscriber implements SubscriberInterface
 	 *
 	 * @return  void
 	 *
-	 * @since   2.0.0-beta
+	 * @since   2.0.0
 	 */
 	public function sendLinkHeader(ApplicationEvent $event): void
 	{

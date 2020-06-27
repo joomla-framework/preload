@@ -16,7 +16,7 @@ use Joomla\Preload\PreloadManager;
 /**
  * Service provider for preload package services
  *
- * @since  2.0.0-beta
+ * @since  2.0.0
  */
 class PreloadProvider implements ServiceProviderInterface
 {
@@ -27,7 +27,7 @@ class PreloadProvider implements ServiceProviderInterface
 	 *
 	 * @return  void
 	 *
-	 * @since   2.0.0-beta
+	 * @since   2.0.0
 	 */
 	public function register(Container $container)
 	{
