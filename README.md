@@ -6,12 +6,12 @@ The Preload package provides a set of utility classes for managing HTTP/2 preloa
 
 ## Installation via Composer
 
-Add `"joomla/preload": "~2.0@dev"` to the require block in your composer.json and then run `composer install`.
+Add `"joomla/preload": "~2.0"` to the require block in your composer.json and then run `composer install`.
 
 ```json
 {
 	"require": {
-		"joomla/preload": "~2.0@dev"
+		"joomla/preload": "~2.0"
 	}
 }
 ```
@@ -19,5 +19,5 @@ Add `"joomla/preload": "~2.0@dev"` to the require block in your composer.json an
 Alternatively, you can simply run the following from the command line:
 
 ```sh
-composer require joomla/preload "~2.0@dev"
+composer require joomla/preload "~2.0"
 ```
