@@ -6,17 +6,17 @@
     "homepage": "https://github.com/joomla-framework/preload",
     "license": "GPL-2.0-or-later",
     "require": {
-        "php": "^7.2.5",
+        "php": "^7.2.5|~8.0.0|~8.1.0",
         "fig/link-util": "^1.0",
         "psr/link": "^1.0"
     },
     "require-dev": {
         "joomla/application": "^2.0",
-        "joomla/coding-standards": "^2.0@alpha",
-        "joomla/di": "^1.5|^2.0",
+        "joomla/coding-standards": "^3.0@dev",
+        "joomla/di": "^2.0",
         "joomla/event": "^2.0",
         "joomla/uri": "^2.0",
-        "phpunit/phpunit": "^8.2",
+        "phpunit/phpunit": "^8.5|^9.0",
         "symfony/web-link": "^3.4|^4.4|^5.0"
     },
     "conflict": {
