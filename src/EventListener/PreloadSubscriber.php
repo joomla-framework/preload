@@ -23,59 +23,58 @@ use Symfony\Component\WebLink\HttpHeaderSerializer;
  */
 class PreloadSubscriber implements SubscriberInterface
 {
-	/**
-	 * The preload manager.
-	 *
-	 * @var    PreloadManager
-	 * @since  2.0.0
-	 */
-	private $preloadManager;
+    /**
+     * The preload manager.
+     *
+     * @var    PreloadManager
+     * @since  2.0.0
+     */
+    private $preloadManager;
 
-	/**
-	 * Event subscriber constructor.
-	 *
-	 * @param   PreloadManager  $preloadManager  The preload manager
-	 *
-	 * @since   2.0.0
-	 */
-	public function __construct(PreloadManager $preloadManager)
-	{
-		$this->preloadManager = $preloadManager;
-	}
+    /**
+     * Event subscriber constructor.
+     *
+     * @param   PreloadManager  $preloadManager  The preload manager
+     *
+     * @since   2.0.0
+     */
+    public function __construct(PreloadManager $preloadManager)
+    {
+        $this->preloadManager = $preloadManager;
+    }
 
-	/**
-	 * Returns an array of events this subscriber will listen to.
-	 *
-	 * @return  array
-	 *
-	 * @since   2.0.0
-	 */
-	public static function getSubscribedEvents(): array
-	{
-		return [
-			ApplicationEvents::BEFORE_RESPOND => 'sendLinkHeader',
-		];
-	}
+    /**
+     * Returns an array of events this subscriber will listen to.
+     *
+     * @return  array
+     *
+     * @since   2.0.0
+     */
+    public static function getSubscribedEvents(): array
+    {
+        return [
+            ApplicationEvents::BEFORE_RESPOND => 'sendLinkHeader',
+        ];
+    }
 
-	/**
-	 * Sends the link header for preloaded assets.
-	 *
-	 * @param   ApplicationEvent  $event  Event object
-	 *
-	 * @return  void
-	 *
-	 * @since   2.0.0
-	 */
-	public function sendLinkHeader(ApplicationEvent $event): void
-	{
-		/** @var AbstractWebApplication $application */
-		$application = $event->getApplication();
+    /**
+     * Sends the link header for preloaded assets.
+     *
+     * @param   ApplicationEvent  $event  Event object
+     *
+     * @return  void
+     *
+     * @since   2.0.0
+     */
+    public function sendLinkHeader(ApplicationEvent $event): void
+    {
+        /** @var AbstractWebApplication $application */
+        $application = $event->getApplication();
 
-		$linkProvider = $this->preloadManager->getLinkProvider();
+        $linkProvider = $this->preloadManager->getLinkProvider();
 
-		if ($linkProvider instanceof EvolvableLinkProviderInterface && $links = $linkProvider->getLinks())
-		{
-			$application->setHeader('Link', (new HttpHeaderSerializer)->serialize($links));
-		}
-	}
+        if ($linkProvider instanceof EvolvableLinkProviderInterface && $links = $linkProvider->getLinks()) {
+            $application->setHeader('Link', (new HttpHeaderSerializer())->serialize($links));
+        }
+    }
 }

@@ -20,35 +20,33 @@ use Joomla\Preload\PreloadManager;
  */
 class PreloadProvider implements ServiceProviderInterface
 {
-	/**
-	 * Registers the service provider with a DI container.
-	 *
-	 * @param   Container  $container  The DI container.
-	 *
-	 * @return  void
-	 *
-	 * @since   2.0.0
-	 */
-	public function register(Container $container)
-	{
-		$container->share(
-			PreloadManager::class,
-			static function (): PreloadManager
-			{
-				return new PreloadManager;
-			}
-		);
+    /**
+     * Registers the service provider with a DI container.
+     *
+     * @param   Container  $container  The DI container.
+     *
+     * @return  void
+     *
+     * @since   2.0.0
+     */
+    public function register(Container $container)
+    {
+        $container->share(
+            PreloadManager::class,
+            static function (): PreloadManager {
+                return new PreloadManager();
+            }
+        );
 
-		$container->share(
-			PreloadSubscriber::class,
-			static function (Container $container): PreloadSubscriber
-			{
-				return new PreloadSubscriber(
-					$container->get(PreloadManager::class)
-				);
-			}
-		);
+        $container->share(
+            PreloadSubscriber::class,
+            static function (Container $container): PreloadSubscriber {
+                return new PreloadSubscriber(
+                    $container->get(PreloadManager::class)
+                );
+            }
+        );
 
-		$container->tag('event.subscriber', [PreloadSubscriber::class]);
-	}
+        $container->tag('event.subscriber', [PreloadSubscriber::class]);
+    }
 }

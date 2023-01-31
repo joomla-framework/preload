@@ -19,40 +19,40 @@ use Psr\Link\EvolvableLinkProviderInterface;
  */
 class PreloadSubscriberTest extends TestCase
 {
-	/**
-	 * @testdox  A Link header is enqueued to the application
-	 */
-	public function testAddHeaderToApplication()
-	{
-		$link = (new Link('preload', '/foo.css'))->withAttribute('as', 'style')->withAttribute('crossorigin', true);
+    /**
+     * @testdox  A Link header is enqueued to the application
+     */
+    public function testAddHeaderToApplication()
+    {
+        $link = (new Link('preload', '/foo.css'))->withAttribute('as', 'style')->withAttribute('crossorigin', true);
 
-		$provider = $this->createMock(EvolvableLinkProviderInterface::class);
-		$provider->expects($this->once())
-			->method('getLinks')
-			->willReturn([$link]);
+        $provider = $this->createMock(EvolvableLinkProviderInterface::class);
+        $provider->expects($this->once())
+            ->method('getLinks')
+            ->willReturn([$link]);
 
-		$manager = $this->createMock(PreloadManager::class);
-		$manager->expects($this->once())
-			->method('getLinkProvider')
-			->willReturn($provider);
+        $manager = $this->createMock(PreloadManager::class);
+        $manager->expects($this->once())
+            ->method('getLinkProvider')
+            ->willReturn($provider);
 
-		$application = $this->getMockForAbstractClass(
-			AbstractWebApplication::class,
-			[],
-			'',
-			false,
-			false,
-			true,
-			['setHeader']
-		);
-		$application->expects($this->once())
-			->method('setHeader');
+        $application = $this->getMockForAbstractClass(
+            AbstractWebApplication::class,
+            [],
+            '',
+            false,
+            false,
+            true,
+            ['setHeader']
+        );
+        $application->expects($this->once())
+            ->method('setHeader');
 
-		$event = $this->createMock(ApplicationEvent::class);
-		$event->expects($this->once())
-			->method('getApplication')
-			->willReturn($application);
+        $event = $this->createMock(ApplicationEvent::class);
+        $event->expects($this->once())
+            ->method('getApplication')
+            ->willReturn($application);
 
-		(new PreloadSubscriber($manager))->sendLinkHeader($event);
-	}
+        (new PreloadSubscriber($manager))->sendLinkHeader($event);
+    }
 }

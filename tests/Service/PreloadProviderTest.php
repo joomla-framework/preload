@@ -16,14 +16,14 @@ use PHPUnit\Framework\TestCase;
  */
 class PreloadProviderTest extends TestCase
 {
-	/**
-	 * @testdox  The services are registered to the container
-	 */
-	public function testServiceRegistration()
-	{
-		$container = (new Container)
-			->registerServiceProvider(new PreloadProvider);
+    /**
+     * @testdox  The services are registered to the container
+     */
+    public function testServiceRegistration()
+    {
+        $container = (new Container())
+            ->registerServiceProvider(new PreloadProvider());
 
-		$this->assertTrue($container->has(PreloadManager::class));
-	}
+        $this->assertTrue($container->has(PreloadManager::class));
+    }
 }
