@@ -31,7 +31,7 @@ class PreloadManager
     /**
      * PreloadManager constructor
      *
-     * @param   EvolvableLinkProviderInterface  $linkProvider  The link provider
+     * @param   ?EvolvableLinkProviderInterface  $linkProvider  The link provider
      *
      * @since   2.0.0
      */
