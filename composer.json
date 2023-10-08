@@ -11,10 +11,10 @@
         "psr/link": "^1.0"
     },
     "require-dev": {
-        "joomla/application": "3.0.x-dev",
-        "joomla/di": "3.0.x-dev",
-        "joomla/event": "3.0.x-dev",
-        "joomla/uri": "3.0.x-dev",
+        "joomla/application": "^3.0",
+        "joomla/di": "^3.0",
+        "joomla/event": "^3.0",
+        "joomla/uri": "^3.0",
         "phpunit/phpunit": "^9.5.28",
         "symfony/web-link": "^5.0",
         "squizlabs/php_codesniffer": "^3.7.2",
