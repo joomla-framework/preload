@@ -1,4 +1,4 @@
-# The Preload Package [![Build Status](https://ci.joomla.org/api/badges/joomla-framework/preload/status.svg?ref=refs/heads/3.x-dev)](https://ci.joomla.org/joomla-framework/preload)
+# The Preload Package [![Build Status](https://github.com/joomla-framework/preload/actions/workflows/ci.yml/badge.svg?branch=3.x-dev)](https://github.com/joomla-framework/preload)
 
 [![Latest Stable Version](https://poser.pugx.org/joomla/preload/v/stable)](https://packagist.org/packages/joomla/preload)
 [![Total Downloads](https://poser.pugx.org/joomla/preload/downloads)](https://packagist.org/packages/joomla/preload)
