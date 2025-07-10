@@ -1,0 +1,7 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Instanceof between Psr\\Link\\EvolvableLinkProviderInterface and Psr\\Link\\EvolvableLinkProviderInterface will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/EventListener/PreloadSubscriber.php
