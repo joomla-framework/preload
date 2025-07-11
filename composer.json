@@ -14,6 +14,7 @@
         "joomla/application": "dev-4.x-dev",
         "joomla/di": "dev-4.x-dev",
         "joomla/event": "dev-4.x-dev",
+        "joomla/input": "dev-4.x-dev",
         "joomla/uri": "dev-4.x-dev",
         "phpunit/phpunit": "^12.0",
         "symfony/web-link": "^7.3",
