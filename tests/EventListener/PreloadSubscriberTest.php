@@ -37,17 +37,7 @@ class PreloadSubscriberTest extends TestCase
             ->method('getLinkProvider')
             ->willReturn($provider);
 
-        $application = $this->getMockForAbstractClass(
-            AbstractWebApplication::class,
-            [],
-            '',
-            false,
-            false,
-            true,
-            ['setHeader']
-        );
-        $application->expects($this->once())
-            ->method('setHeader');
+        $application = new TestAbstractWebApplication();
 
         $event = $this->createMock(ApplicationEvent::class);
         $event->expects($this->once())
@@ -55,5 +45,20 @@ class PreloadSubscriberTest extends TestCase
             ->willReturn($application);
 
         (new PreloadSubscriber($manager))->sendLinkHeader($event);
+    }
+}
+
+/**
+ * Class TestAbstractWebApplication
+ *
+ * To have an instance of the class to test
+ *
+ * @package  Joomla\Preload\Tests\EventListener
+ * @since    1.0
+ */
+class TestAbstractWebApplication extends AbstractWebApplication {
+    protected function doExecute()
+    {
+        // TODO: Implement doExecute() method.
     }
 }
