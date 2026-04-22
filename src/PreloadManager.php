@@ -18,7 +18,7 @@ use Psr\Link\EvolvableLinkProviderInterface;
  *
  * @since  2.0.0
  */
-class PreloadManager
+class PreloadManager implements PreloadManagerInterface
 {
     /**
      * The link provider
@@ -57,13 +57,15 @@ class PreloadManager
      *
      * @param   EvolvableLinkProviderInterface  $linkProvider  The link provider
      *
-     * @return  void
+     * @return  $this
      *
      * @since   2.0.0
      */
-    public function setLinkProvider(EvolvableLinkProviderInterface $linkProvider): void
+    public function setLinkProvider(EvolvableLinkProviderInterface $linkProvider): self
     {
         $this->linkProvider = $linkProvider;
+
+        return $this;
     }
 
     /**
