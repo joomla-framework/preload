@@ -12,7 +12,6 @@ use Joomla\Application\AbstractWebApplication;
 use Joomla\Application\Event\ApplicationEvent;
 use Joomla\Preload\EventListener\PreloadSubscriber;
 use Joomla\Preload\PreloadManager;
-use Laminas\Diactoros\Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Link\EvolvableLinkProviderInterface;
 
@@ -58,9 +57,6 @@ class PreloadSubscriberTest extends TestCase
  * @since    1.0
  */
 class TestAbstractWebApplication extends AbstractWebApplication {
-    public function __construct() {
-        $this->setResponse(new Response());
-    }
     protected function doExecute()
     {
         // TODO: Implement doExecute() method.
