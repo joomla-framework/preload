@@ -56,3 +56,36 @@ final class PreloadExtension extends AbstractExtension
 		return $uri;
 	}
 ```
+
+## Things to know before you build on this
+
+**The manager only collects; the header comes from the subscriber.** `PreloadManager::link()` adds
+a link to the provider and nothing else, despite its docblock saying "Adds a `Link` HTTP header".
+The header is written by `EventListener\PreloadSubscriber` on the application's `BEFORE_RESPOND`
+event. Without `joomla/event` and `symfony/web-link` installed and the subscriber registered, the
+collected links have no effect.
+
+**Nothing is validated.** `link()` accepts any URI and any attribute values and passes them to the
+serializer, which writes them into a response header. If a URI can come from user input, check it
+for control characters yourself before handing it over.
+
+**No deduplication and no limit.** Calling `preload('/app.css')` twice produces two identical
+entries, and there is no cap on how many links accumulate. A loop over user data can grow the
+`Link` header past what proxies accept, which turns into a 502 or 431 for the whole response.
+
+**`modulepreload` is missing.** There are helpers for `preload`, `prefetch`, `preconnect`,
+`dns-prefetch` and `prerender`, but not for ES modules. Use the generic method:
+
+```php
+$preloadManager->link('/app.mjs', 'modulepreload');
+```
+
+**Fonts need `crossorigin`.** A font preloaded without it is fetched twice:
+
+```php
+$preloadManager->preload('/fonts/x.woff2', ['as' => 'font', 'crossorigin' => true]);
+```
+
+**The `suggest` version ranges are stale.** `composer.json` suggests `joomla/application ^2.0`,
+`joomla/di ^1.5|^2.0`, `joomla/event ^2.0` and `symfony/web-link ^3.4|^4.4|^5.0`, while
+`require-dev` pins the 4.x/7.x releases actually used. Follow `require-dev`.
