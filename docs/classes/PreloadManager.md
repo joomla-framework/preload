@@ -109,22 +109,6 @@ The `prefetch()` method is a shortcut method for specifying a resource should ha
 public function prefetch(string $uri, array $attributes = []);
 ```
 
-#### Prerender a resource
-
-The `prerender()` method is a shortcut method for specifying a resource should have the "prerender" relation.
-
-```php
-/**
- * @param   string  $uri         The relation URI
- * @param   array   $attributes  The attributes of this link (e.g. "array('as' => true)", "array('crossorigin' => 'use-credentials')")
- *
- * @return  void
- *
- * @since   __DEPLOY_VERSION__
- */
-public function prerender(string $uri, array $attributes = []);
-```
-
 #### Add a resource
 
 The `link()` method is used for adding a link to a resource with its relations.

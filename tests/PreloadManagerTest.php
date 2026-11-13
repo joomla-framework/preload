@@ -91,16 +91,4 @@ class PreloadManagerTest extends TestCase
 
         $this->assertEquals([$link], array_values($this->object->getLinkProvider()->getLinks()));
     }
-
-    /**
-     * @testdox  A Link header for the prerender relation is added
-     */
-    public function testPrerender()
-    {
-        $this->object->prerender('/foo.css', ['as' => 'style', 'crossorigin' => true]);
-
-        $link = (new Link('prerender', '/foo.css'))->withAttribute('as', 'style')->withAttribute('crossorigin', true);
-
-        $this->assertEquals([$link], array_values($this->object->getLinkProvider()->getLinks()));
-    }
 }
