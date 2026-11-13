@@ -9,6 +9,8 @@ namespace Joomla\Preload\Tests;
 
 use Fig\Link\Link;
 use Joomla\Preload\PreloadManager;
+use PHPUnit\Framework\Attributes\IgnoreDeprecations;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -56,6 +58,16 @@ class PreloadManagerTest extends TestCase
         $this->assertEquals([$link], array_values($this->object->getLinkProvider()->getLinks()));
     }
 
+    #[TestDox('A Link header for the modulepreload relation is added')]
+    public function testModulepreload()
+    {
+        $this->object->modulepreload('/app.mjs', ['crossorigin' => 'use-credentials']);
+
+        $link = (new Link('modulepreload', '/app.mjs'))->withAttribute('crossorigin', 'use-credentials');
+
+        $this->assertEquals([$link], array_values($this->object->getLinkProvider()->getLinks()));
+    }
+
     /**
      * @testdox  A Link header for the dns-prefetch relation is added
      */
@@ -95,8 +107,14 @@ class PreloadManagerTest extends TestCase
     /**
      * @testdox  A Link header for the prerender relation is added
      */
+    #[IgnoreDeprecations]
     public function testPrerender()
     {
+        $this->expectUserDeprecationMessage(
+            'Since joomla/preload __DEPLOY_VERSION__: Joomla\Preload\PreloadManager::prerender() is deprecated and will be removed in 5.0, '
+            . 'as browsers no longer support the "prerender" relation. Use the Speculation Rules API instead.'
+        );
+
         $this->object->prerender('/foo.css', ['as' => 'style', 'crossorigin' => true]);
 
         $link = (new Link('prerender', '/foo.css'))->withAttribute('as', 'style')->withAttribute('crossorigin', true);
