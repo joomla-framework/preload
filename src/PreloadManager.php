@@ -147,19 +147,4 @@ class PreloadManager
     {
         $this->link($uri, 'prefetch', $attributes);
     }
-
-    /**
-     * Indicates to the client that it should prerender this resource.
-     *
-     * @param   string  $uri         The relation URI
-     * @param   array   $attributes  The attributes of this link (e.g. "array('as' => true)", "array('pr' => 0.5)")
-     *
-     * @return  void
-     *
-     * @since   2.0.0
-     */
-    public function prerender(string $uri, array $attributes = []): void
-    {
-        $this->link($uri, 'prerender', $attributes);
-    }
 }
