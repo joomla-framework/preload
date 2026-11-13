@@ -45,6 +45,10 @@ public function setLinkProvider(EvolvableLinkProviderInterface $linkProvider);
 
 ### Adding links
 
+A link that is identical to one the link provider already holds (same URI, same relations and same attributes, in any
+order) is not added again, so several parts of an application can preload the same asset without the `Link` header
+repeating it. Links that differ in any attribute value, such as `crossorigin`, are kept separately.
+
 #### Preload a resource
 
 The `preload()` method is a shortcut method for specifying a resource should have the "preload" relation.
