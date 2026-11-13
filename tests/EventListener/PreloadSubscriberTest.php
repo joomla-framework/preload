@@ -8,10 +8,14 @@
 namespace Joomla\Preload\Tests\EventListener;
 
 use Fig\Link\Link;
+use Joomla\Application\AbstractApplication;
 use Joomla\Application\AbstractWebApplication;
+use Joomla\Application\ApplicationEvents;
 use Joomla\Application\Event\ApplicationEvent;
 use Joomla\Preload\EventListener\PreloadSubscriber;
 use Joomla\Preload\PreloadManager;
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+use PHPUnit\Framework\Attributes\TestDox;
 use PHPUnit\Framework\TestCase;
 use Psr\Link\EvolvableLinkProviderInterface;
 
@@ -45,6 +49,34 @@ class PreloadSubscriberTest extends TestCase
             ->willReturn($application);
 
         (new PreloadSubscriber($manager))->sendLinkHeader($event);
+
+        $this->assertSame(
+            [['name' => 'Link', 'value' => '</foo.css>; rel="preload"; as="style"; crossorigin']],
+            $application->getHeaders()
+        );
+    }
+
+    #[TestDox('An application that is not a web application is ignored')]
+    #[DoesNotPerformAssertions]
+    public function testNonWebApplicationIsIgnored()
+    {
+        $manager = new PreloadManager();
+        $manager->preload('/foo.css', ['as' => 'style']);
+
+        $event = new ApplicationEvent(ApplicationEvents::BEFORE_RESPOND, new TestAbstractApplication());
+
+        // Calling setHeader() on this application would be a call to an undefined method
+        (new PreloadSubscriber($manager))->sendLinkHeader($event);
+    }
+}
+
+/**
+ * Application without response headers
+ */
+class TestAbstractApplication extends AbstractApplication
+{
+    protected function doExecute()
+    {
     }
 }
 

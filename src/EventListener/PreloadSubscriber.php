@@ -9,12 +9,11 @@
 
 namespace Joomla\Preload\EventListener;
 
-use Joomla\Application\AbstractWebApplication;
 use Joomla\Application\ApplicationEvents;
 use Joomla\Application\Event\ApplicationEvent;
+use Joomla\Application\WebApplicationInterface;
 use Joomla\Event\SubscriberInterface;
 use Joomla\Preload\PreloadManager;
-use Psr\Link\EvolvableLinkProviderInterface;
 use Symfony\Component\WebLink\HttpHeaderSerializer;
 
 /**
@@ -61,6 +60,8 @@ class PreloadSubscriber implements SubscriberInterface
     /**
      * Sends the link header for preloaded assets.
      *
+     * Applications that do not implement WebApplicationInterface have no response headers and are ignored.
+     *
      * @param   ApplicationEvent  $event  Event object
      *
      * @return  void
@@ -69,14 +70,15 @@ class PreloadSubscriber implements SubscriberInterface
      */
     public function sendLinkHeader(ApplicationEvent $event): void
     {
-        /** @var AbstractWebApplication $application */
         $application = $event->getApplication();
 
-        $linkProvider = $this->preloadManager->getLinkProvider();
+        if (!$application instanceof WebApplicationInterface) {
+            return;
+        }
 
-        $links = $linkProvider->getLinks();
+        $links = $this->preloadManager->getLinkProvider()->getLinks();
 
-        if ($linkProvider instanceof EvolvableLinkProviderInterface && $links) {
+        if ($links) {
             $application->setHeader('Link', (new HttpHeaderSerializer())->serialize($links));
         }
     }

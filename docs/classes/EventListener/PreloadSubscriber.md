@@ -2,6 +2,8 @@
 
 The `PreloadSubscriber` class is an event subscriber which hooks the `Joomla\Application\ApplicationEvents::BEFORE_RESPOND` event to add a "Link" header with HTTP/2 resources to your application's response.
 
+The header is only set when the application dispatching the event implements `Joomla\Application\WebApplicationInterface` (as `Joomla\Application\AbstractWebApplication` does). For any other application, such as a console application, the subscriber does nothing.
+
 ### Instantiating the class
 
 The event subscriber requires a [`Joomla\Preload\PreloadManager`](../PreloadManager.md) instance when it is instantiated.
