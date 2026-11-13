@@ -141,3 +141,18 @@ The `link()` method is used for adding a link to a resource with its relations.
  */
 public function link(string $uri, string $rel, array $attributes = []);
 ```
+
+The URI and the relation type end up in the `Link` header, so `link()` (and every shortcut method above, which all call
+it) checks them first:
+
+- Characters that are not allowed in a URI, such as spaces, double quotes, angle brackets and non-ASCII bytes, are
+  percent-encoded, so `'/my file.css'` is sent as `</my%20file.css>`. A URI cannot end its `<...>` section early and
+  add further links to the header. Valid URIs, including already percent-encoded ones, and the curly brackets of
+  templated links are left as they are.
+- A URI that contains control characters (such as CR, LF, tab or NUL) is rejected with an `InvalidArgumentException`.
+- The relation type must be one or more relation types separated by spaces, each either a registered type such as
+  `preload` or `dns-prefetch` (a letter followed by letters, digits, `.` or `-`) or an absolute URI for an extension
+  type. Anything else, such as a value containing quotes, commas or semicolons, is rejected with an
+  `InvalidArgumentException`.
+
+Attribute names and values are passed to the link provider unchanged.

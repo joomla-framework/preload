@@ -69,6 +69,8 @@ class PreloadManager
     /**
      * Adds a "Link" HTTP header.
      *
+     * Characters that are not allowed in a URI (such as spaces, quotes and angle brackets) are percent-encoded.
+     *
      * @param   string  $uri         The relation URI
      * @param   string  $rel         The relation type (e.g. "preload", "prefetch", "prerender" or "dns-prefetch")
      * @param   array   $attributes  The attributes of this link (e.g. "array('as' => true)", "array('pr' => 0.5)")
@@ -76,10 +78,11 @@ class PreloadManager
      * @return  void
      *
      * @since   2.0.0
+     * @throws  \InvalidArgumentException if the URI contains control characters or the relation type is invalid
      */
     public function link(string $uri, string $rel, array $attributes = []): void
     {
-        $link = new Link($rel, $uri);
+        $link = new Link($this->validateRel($rel), $this->encodeUri($uri));
 
         foreach ($attributes as $key => $value) {
             $link = $link->withAttribute($key, $value);
@@ -161,5 +164,52 @@ class PreloadManager
     public function prerender(string $uri, array $attributes = []): void
     {
         $this->link($uri, 'prerender', $attributes);
+    }
+
+    /**
+     * Percent-encodes the characters that are not allowed in a URI, so the URI cannot end its `<...>` section of the header.
+     *
+     * Curly brackets are kept because they mark a templated link.
+     *
+     * @param   string  $uri  The relation URI
+     *
+     * @return  string
+     *
+     * @since   __DEPLOY_VERSION__
+     * @throws  \InvalidArgumentException if the URI contains control characters
+     */
+    private function encodeUri(string $uri): string
+    {
+        if (preg_match('/[\x00-\x1F\x7F]/', $uri)) {
+            throw new \InvalidArgumentException('The link URI must not contain control characters.');
+        }
+
+        return preg_replace_callback(
+            '/[^A-Za-z0-9\-._~:\/?#\[\]@!$&\'()*+,;=%{}]/',
+            static fn (array $matches): string => sprintf('%%%02X', \ord($matches[0])),
+            $uri
+        );
+    }
+
+    /**
+     * Checks that the relation type is a space-separated list of registered (RFC 8288 `reg-rel-type`) or extension
+     * (absolute URI) relation types, so it cannot end the quoted `rel` parameter of the header.
+     *
+     * @param   string  $rel  The relation type
+     *
+     * @return  string
+     *
+     * @since   __DEPLOY_VERSION__
+     * @throws  \InvalidArgumentException if the relation type is invalid
+     */
+    private function validateRel(string $rel): string
+    {
+        $relType = '(?:[A-Za-z][A-Za-z0-9.\-]*|[A-Za-z][A-Za-z0-9+.\-]*:[A-Za-z0-9\-._~:\/?#\[\]@!$&\'()*+,;=%]*)';
+
+        if (!preg_match('/^' . $relType . '(?: +' . $relType . ')*$/D', $rel)) {
+            throw new \InvalidArgumentException(sprintf('Invalid link relation type "%s".', addcslashes($rel, "\0..\37\177")));
+        }
+
+        return $rel;
     }
 }
