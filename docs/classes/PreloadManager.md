@@ -61,6 +61,22 @@ The `preload()` method is a shortcut method for specifying a resource should hav
 public function preload(string $uri, array $attributes = []);
 ```
 
+#### Preload a JavaScript module
+
+The `modulepreload()` method is a shortcut method for specifying a resource should have the "modulepreload" relation, which fetches an ES module and its dependencies ahead of time.
+
+```php
+/**
+ * @param   string  $uri         The relation URI
+ * @param   array   $attributes  The attributes of this link (e.g. "array('crossorigin' => 'use-credentials')")
+ *
+ * @return  void
+ *
+ * @since   __DEPLOY_VERSION__
+ */
+public function modulepreload(string $uri, array $attributes = []);
+```
+
 #### DNS Prefetch a resource
 
 The `dnsPrefetch()` method is a shortcut method for specifying a resource should have the "dns-prefetch" relation.
@@ -112,6 +128,8 @@ public function prefetch(string $uri, array $attributes = []);
 #### Prerender a resource
 
 The `prerender()` method is a shortcut method for specifying a resource should have the "prerender" relation.
+
+> **Deprecated:** `prerender()` is deprecated since __DEPLOY_VERSION__ and will be removed in 5.0. Browsers no longer prerender pages for this relation: Chromium only prefetches the resource ("NoState Prefetch") and replaced prerendering with the Speculation Rules API, and Firefox and Safari never supported it. Calling the method triggers a deprecation notice. Use the [Speculation Rules API](https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API) instead, or `link($uri, 'prerender')` if you still need the header entry.
 
 ```php
 /**

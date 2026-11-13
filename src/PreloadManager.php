@@ -104,6 +104,21 @@ class PreloadManager
     }
 
     /**
+     * Preloads a JavaScript module and its dependencies.
+     *
+     * @param   string  $uri         The relation URI
+     * @param   array   $attributes  The attributes of this link (e.g. "array('crossorigin' => 'use-credentials')")
+     *
+     * @return  void
+     *
+     * @since   __DEPLOY_VERSION__
+     */
+    public function modulepreload(string $uri, array $attributes = []): void
+    {
+        $this->link($uri, 'modulepreload', $attributes);
+    }
+
+    /**
      * Resolves a resource origin as early as possible.
      *
      * @param   string  $uri         The relation URI
@@ -157,9 +172,20 @@ class PreloadManager
      * @return  void
      *
      * @since   2.0.0
+     *
+     * @deprecated  5.0 will be removed without replacement, as browsers no longer support the "prerender" relation.
+     *              Use the Speculation Rules API instead, or link($uri, 'prerender') if you still need the header entry.
      */
     public function prerender(string $uri, array $attributes = []): void
     {
+        trigger_deprecation(
+            'joomla/preload',
+            '__DEPLOY_VERSION__',
+            '%s() is deprecated and will be removed in 5.0, as browsers no longer support the "prerender" relation. '
+            . 'Use the Speculation Rules API instead.',
+            __METHOD__
+        );
+
         $this->link($uri, 'prerender', $attributes);
     }
 }
