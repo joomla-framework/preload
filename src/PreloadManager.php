@@ -12,6 +12,7 @@ namespace Joomla\Preload;
 use Fig\Link\GenericLinkProvider;
 use Fig\Link\Link;
 use Psr\Link\EvolvableLinkProviderInterface;
+use Psr\Link\LinkInterface;
 
 /**
  * Manager for HTTP/2 asset preloading
@@ -85,7 +86,47 @@ class PreloadManager
             $link = $link->withAttribute($key, $value);
         }
 
+        if ($this->hasLink($link)) {
+            return;
+        }
+
         $this->setLinkProvider($this->getLinkProvider()->withLink($link));
+    }
+
+    /**
+     * Checks whether the link provider already holds a link with the same URI, relations and attributes.
+     *
+     * @param   LinkInterface  $link  The link to look for
+     *
+     * @return  boolean
+     *
+     * @since   __DEPLOY_VERSION__
+     */
+    private function hasLink(LinkInterface $link): bool
+    {
+        $rels       = $link->getRels();
+        $attributes = $link->getAttributes();
+
+        sort($rels);
+        ksort($attributes);
+
+        foreach ($this->getLinkProvider()->getLinks() as $existing) {
+            if ($existing->getHref() !== $link->getHref()) {
+                continue;
+            }
+
+            $existingRels       = $existing->getRels();
+            $existingAttributes = $existing->getAttributes();
+
+            sort($existingRels);
+            ksort($existingAttributes);
+
+            if ($existingRels === $rels && $existingAttributes === $attributes) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
